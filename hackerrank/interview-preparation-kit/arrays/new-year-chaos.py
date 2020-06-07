@@ -12,7 +12,7 @@ def minimumBribes(q):
     map = [0] * len(q)
     currentIndex = 0
     while currentIndex < (len(q) - 1):
-        if q[currentIndex+1] - q[currentIndex] == 1:
+        if q[currentIndex + 1] - q[currentIndex] == 1:
             currentIndex += 1
             continue
         for j in range(currentIndex, len(q) - 1):
@@ -29,12 +29,15 @@ def minimumBribes(q):
 
 
 if __name__ == '__main__':
-    file = open('./new-year-chaos/input06.txt')
+    file = open('./new-year-chaos/input03.txt')
     t = int(file.readline())
-
+    out = ""
     for t_itr in range(t):
         n = int(file.readline())
 
         q = list(map(int, file.readline().rstrip().split()))
 
-        print(str(minimumBribes(q)))
+        out += str(minimumBribes(q)) + "\n"
+
+expected = open("./new-year-chaos/output03.txt").read()
+assert out.strip() == expected
