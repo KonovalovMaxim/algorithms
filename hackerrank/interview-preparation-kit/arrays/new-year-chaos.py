@@ -10,20 +10,31 @@ import sys
 def minimumBribes(q):
     counter = 0
     map = [0] * len(q)
-    for i in range(len(q)):
-        for j in range(i, len(q) - 1):
+    currentIndex = 0
+    while currentIndex < (len(q) - 1):
+        if q[currentIndex+1] - q[currentIndex] == 1:
+            currentIndex += 1
+            continue
+        for j in range(currentIndex, len(q) - 1):
             if q[j] > q[j + 1]:
                 tmp = q[j + 1]
                 q[j + 1] = q[j]
                 q[j] = tmp
-                if q[j + 1] < q[j]:
-                    map[q[j] - 1] += 1
-                else:
-                    map[q[j + 1] - 1] += 1
+                map[q[j + 1] - 1] += 1
                 counter += 1
                 if map[q[j + 1] - 1] > 2 or map[q[j] - 1] > 2:
                     return "Too chaotic"
+
     return counter
 
 
-assert minimumBribes([1, 2, 5, 3, 7, 8, 6, 4]) == 7
+if __name__ == '__main__':
+    file = open('./new-year-chaos/input06.txt')
+    t = int(file.readline())
+
+    for t_itr in range(t):
+        n = int(file.readline())
+
+        q = list(map(int, file.readline().rstrip().split()))
+
+        print(str(minimumBribes(q)))
