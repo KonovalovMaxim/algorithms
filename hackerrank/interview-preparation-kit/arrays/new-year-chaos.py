@@ -15,21 +15,29 @@ def minimumBribes(q):
         if q[currentIndex + 1] - q[currentIndex] == 1:
             currentIndex += 1
             continue
-        for j in range(currentIndex, len(q) - 1):
-            if q[j] > q[j + 1]:
-                tmp = q[j + 1]
-                q[j + 1] = q[j]
-                q[j] = tmp
-                map[q[j + 1] - 1] += 1
-                counter += 1
-                if map[q[j + 1] - 1] > 2 or map[q[j] - 1] > 2:
-                    return "Too chaotic"
+        if (currentIndex == 0 and q[currentIndex] != 1):
+            next = 1
+        else:
+            next = q[currentIndex] + 1
+
+        j = currentIndex
+
+        while q[j] != next:
+            j += 1
+        if q[j - 1] > q[j]:
+            tmp = q[j]
+            q[j] = q[j - 1]
+            q[j - 1] = tmp
+            map[q[j] - 1] += 1
+            counter += 1
+            if map[q[j] - 1] > 2 or map[q[j - 1] - 1] > 2:
+                return "Too chaotic"
 
     return counter
 
 
 if __name__ == '__main__':
-    file = open('./new-year-chaos/input03.txt')
+    file = open('./new-year-chaos/input06.txt')
     t = int(file.readline())
     out = ""
     for t_itr in range(t):
@@ -39,5 +47,5 @@ if __name__ == '__main__':
 
         out += str(minimumBribes(q)) + "\n"
 
-expected = open("./new-year-chaos/output03.txt").read()
+expected = open("./new-year-chaos/output06.txt").read()
 assert out.strip() == expected
