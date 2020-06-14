@@ -30,19 +30,16 @@ def minimumBribes(q):
     return counter
 
 
-# print(minimumBribes([1, 2, 5, 3, 4, 7, 8, 6]))
-print(minimumBribes([2, 5, 1, 3, 4]))
+if __name__ == '__main__':
+    file = open('./new-year-chaos/input06.txt')
+    t = int(file.readline())
+    out = ""
+    for t_itr in range(t):
+        n = int(file.readline())
 
-# if __name__ == '__main__':
-#     file = open('./new-year-chaos/input03.txt')
-#     t = int(file.readline())
-#     out = ""
-#     for t_itr in range(t):
-#         n = int(file.readline())
-#
-#         q = list(map(int, file.readline().rstrip().split()))
-#
-#         out += str(minimumBribes(q)) + "\n"
-#
-# expected = open("./new-year-chaos/output03.txt").read()
-# assert out.strip() == expected
+        q = list(map(int, file.readline().rstrip().split()))
+
+        out += str(minimumBribes(q)) + "\n"
+
+expected = open("./new-year-chaos/output06.txt").read()
+assert out.strip() == expected
