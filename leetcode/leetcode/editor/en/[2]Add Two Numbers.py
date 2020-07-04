@@ -28,41 +28,20 @@ class Solution:
         result = runner = ListNode(0)
         register = 0
         while l1 or l2:
-            if l1 and l2:
-                currentValue = l1.val + l2.val + register
-                if currentValue >= 10:
-                    currentValue = currentValue % 10
-                    register = 1
-                else:
-                    register = 0
-                runner.next = ListNode(currentValue)
-                runner = runner.next
+            sum = 0
+            if l1:
+                sum += l1.val
                 l1 = l1.next
+            if l2:
+                sum += l2.val
                 l2 = l2.next
-            else:
-                while l1:
-                    currentValue = l1.val + register
-                    if currentValue >= 10:
-                        currentValue = currentValue % 10
-                        register = 1
-                    else:
-                        register = 0
-                    runner.next = ListNode(currentValue)
-                    runner = runner.next
-                    l1 = l1.next
-                while l2:
-                    currentValue = l2.val + register
-                    if currentValue >= 10:
-                        currentValue = currentValue % 10
-                        register = 1
-                    else:
-                        register = 0
-                    runner.next = ListNode(currentValue)
-                    runner = runner.next
-                    l2 = l2.next
+            sum += register
+            runner.next = ListNode(sum % 10)
+            runner = runner.next
+            register = sum // 10
 
-        if register == 1:
-            runner.next = ListNode(1)
+        if register > 0:
+            runner.next = ListNode(register)
             runner = runner.next
 
         return result.next
