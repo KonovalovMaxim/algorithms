@@ -68,4 +68,3 @@ class Solution:
         return result.next
 
 # leetcode submit region end(Prohibit modification and deletion)
-print(10 % 10)
