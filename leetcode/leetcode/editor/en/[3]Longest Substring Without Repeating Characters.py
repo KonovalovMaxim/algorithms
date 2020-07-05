@@ -17,7 +17,7 @@
 # Input: "bbbbb"
 # Output: 1
 # Explanation: The answer is "b", with the length of 1.
-#  
+#
 # 
 #  
 #  Example 3: 
@@ -38,24 +38,15 @@
 # leetcode submit region begin(Prohibit modification and deletion)
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        if not s:
+        if len(s) == 0:
             return 0
-        maxCounter = 0
-        counter = 0
-        i = 0
-        map = {}
-        while i < len(s):
-            if s[i] in map.keys():
-                i = map[s[i]] + 1
-                map = {}
-                map[s[i]] = i
-                counter = 1
-            else:
-                counter += 1
-                map[s[i]] = i
-            maxCounter = max(counter, maxCounter)
-            i += 1
-        return maxCounter
+        maxLength = 1
+        j = 0
+        for i in range(1, len(s)):
+            while s[i] in s[j:i] and j < i:
+                j += 1
+            maxLength = max(maxLength, i - j + 1)
+        return maxLength
 
 
 # leetcode submit region end(Prohibit modification and deletion)
@@ -68,3 +59,4 @@ assert Solution().lengthOfLongestSubstring("a") == 1
 assert Solution().lengthOfLongestSubstring("z") == 1
 assert Solution().lengthOfLongestSubstring("aab") == 2
 assert Solution().lengthOfLongestSubstring("dvdf") == 3
+# assert Solution().lengthOfLongestSubstring("#$%^&*()!") == 3
