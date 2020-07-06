@@ -94,7 +94,6 @@ class Solution:
                 start = i
                 first = False
 
-
         if start == -1:
             return 0
         return self.convertToInt(s[start:end])
@@ -114,10 +113,7 @@ class Solution:
                 continue
             length = len(s) - i - 1
             digit = int(s[i])
-            if number == 0:
-                number = digit * (10 ** length)
-            else:
-                number += digit * (10 ** length)
+            number += digit * (10 ** length)
 
             if number > 2147483647:
                 if minus == -1:
@@ -125,6 +121,7 @@ class Solution:
                 else:
                     return 2147483647
         return number * minus
+
 
 # leetcode submit region end(Prohibit modification and deletion)
 
