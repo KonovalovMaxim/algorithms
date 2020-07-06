@@ -24,52 +24,37 @@ class Solution:
     def longestPalindrome(self, s: str) -> str:
         if not s:
             return ""
-        maxPalindrome = s[0]
+        if len(s) == 1:
+            return s[0]
+        start = 0
+        end = 0
         for i in range(0, len(s)):
-            odd = self.checkOdd(s, i)
-            even = self.checkEven(s, i)
-            if len(odd) < len(even):
-                current = even
-            else:
-                current = odd
-            if len(maxPalindrome) < len(current):
-                maxPalindrome = current
-        return maxPalindrome
+            even = self.check(s, i, i + 1)
+            odd = self.check(s, i, i)
 
-    def checkOdd(self, s: str, i: int) -> str:
-        currentPalindrome = s[i]
-        j = 1
-        while i - j >= 0 and i + j < len(s):
-            if s[i - j] == s[i + j]:
-                currentPalindrome = s[i - j] + currentPalindrome + s[i - j]
-            else:
-                break
-            j += 1
-        return currentPalindrome
+            current = max(even, odd)
+            if current > end - start:
+                start = i - int((current - 1) / 2)
+                end = i + int(current / 2)
 
-    def checkEven(self, s: str, i: int) -> str:
-        if i + 1 < len(s) and s[i] == s[i + 1]:
-            currentPalindrome = s[i] + s[i + 1]
-            j = 1
-            while i - j >= 0 and i + j + 1 < len(s):
-                if s[i - j] == s[i + j + 1]:
-                    currentPalindrome = s[i - j] + currentPalindrome + s[i + j + 1]
-                else:
-                    break
-                j += 1
-            return currentPalindrome
-        else:
-            return ""
+        return s[start:(end + 1)]
+
+    def check(self, s: str, left: int, right: int) -> int:
+        if left > right:
+            return 0
+        while left >= 0 and right < len(s) and s[left] == s[right]:
+            left -= 1
+            right += 1
+        return right - left - 1
 
 
 # leetcode submit region end(Prohibit modification and deletion)
 
-# print(Solution().longestPalindrome("babad"))
-assert Solution().longestPalindrome("babad") == "bab"
+assert Solution().longestPalindrome("babad") == "aba"
 assert Solution().longestPalindrome("cbbd") == "bb"
 assert Solution().longestPalindrome("") == ""
 assert Solution().longestPalindrome("a") == "a"
-assert Solution().longestPalindrome("ab") == "a"
+assert Solution().longestPalindrome("ab") == "b"
 assert Solution().longestPalindrome("bb") == "bb"
 assert Solution().longestPalindrome("bab") == "bab"
 assert Solution().longestPalindrome("abba") == "abba"
@@ -78,4 +63,3 @@ assert Solution().longestPalindrome("tabbat") == "tabbat"
 assert Solution().longestPalindrome("ababa") == "ababa"
 assert Solution().longestPalindrome("abababbbbbb") == "bbbbbb"
 assert Solution().longestPalindrome("ababavcxzxcv") == "vcxzxcv"
-
