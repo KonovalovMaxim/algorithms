@@ -51,6 +51,8 @@ class Solution {
     /**
      * @param Integer $N
      * @return Integer
+     * По формуле
+     *       return round(((5 ** .5 + 1) / 2) ** $N / 5 ** .5);
      */
     function fib($N) {
         if($N ==0 ) {
