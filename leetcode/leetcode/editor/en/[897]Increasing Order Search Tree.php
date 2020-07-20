@@ -109,5 +109,3 @@ class Solution
 //leetcode submit region end(Prohibit modification and deletion)
 $tree = new TreeNode(5, new TreeNode(3, new TreeNode(2, new TreeNode(1)), new TreeNode(4)), new TreeNode(6, null, new TreeNode(8, new TreeNode(7), new TreeNode(9))));
 (new Solution())->treeWalk($tree);
-
-echo "123123";
