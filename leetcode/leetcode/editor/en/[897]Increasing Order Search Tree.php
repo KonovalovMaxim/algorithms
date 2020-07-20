@@ -79,16 +79,20 @@ class Solution
         if ($root->left) {
             $left = $root->left;
             if ($left && $left->right) {
+                //Переставляем макушку дерева в самую правую ветку
                 $right = $left->right;
+                //тут ищем самую правую ветку
                 while ($right->right) {
                     $right = $right->right;
                 }
+                //переставляем
                 $right->right = $root;
                 $root->left = null;
                 $root = $left;
                 $this->treeWalk($root);
                 return;
             }
+            //Если правой ветки нет то просто переставляем макушку дерева к левой
             if ($left) {
                 $left->right = $root;
                 $root->left = null;
