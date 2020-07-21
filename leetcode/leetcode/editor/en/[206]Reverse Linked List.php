@@ -37,42 +37,32 @@ class Solution
      */
     function reverseList($head)
     {
-        $len = 0;
-        $runner = $head;
-        while ($runner) {
-            $len++;
-            $runner = $runner->next;
-        }
+        return $this->reverseListRecursive($head);
+    }
+
+    function reverseListIterative(ListNode $head)
+    {
         $result = null;
-        for ($i = 0; $i < $len; $i++) {
-            $runner = $head;
-            $prev = null;
-            while ($runner->next) {
-                $prev = $runner;
-                $runner = $runner->next;
-            }
-            if ($prev !== null) {
-                unset($prev->next);
-            }
-            $this->append($result, $runner);
+        while ($head) {
+            $result = new ListNode($head->val, $result);
+            $head = $head->next;
         }
         return $result;
     }
 
-
-    function append(ListNode &$head = null, ListNode $element)
+    function reverseListRecursive(?ListNode $head, ?ListNode $prev = null)
     {
-        if ($head == null) {
-            $head = $element;
-            return;
+        $next = $head->next;
+        $head->next = $prev;
+        if ($next) {
+            return $this->reverseListRecursive($next, $head);
         }
-        if ($head->next === null) {
-            $head->next = $element;
-        } else {
-            $this->append($head->next, $element);
-        }
+        return $head;
     }
 }
 
 //leetcode submit region end(Prohibit modification and deletion)
-$res = (new Solution())->reverseList(new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5))))));
+$list = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5)))));
+$res = (new Solution())->reverseList($list);
+
+var_dump($res);
