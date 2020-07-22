@@ -65,19 +65,17 @@ class Solution
     function middleNode($head)
     {
         $runner = $head;
-        $counter = 0;
+        $middle = $head;
+        $step = false;
+
         while ($runner) {
             $runner = $runner->next;
-            $counter++;
+            if ($step) {
+                $middle = $middle->next;
+            }
+            $step = !$step;
         }
-        $runner = $head;
-        $middle = $counter % 2 == 0 ? ($counter / 2) : intval($counter / 2);
-        $i = 0;
-        while ($i < $middle){
-            $runner = $runner->next;
-            $i++;
-        }
-        return $runner;
+        return $middle;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
