@@ -53,7 +53,6 @@ class Solution
                         if (isset($matrix[$x][$y])) {
                             $sum += $matrix[$x][$y];
                             $total++;
-                            $elems[] = $matrix[$x][$y];
                         }
                     }
                 }
